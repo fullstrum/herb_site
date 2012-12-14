@@ -8,6 +8,11 @@
   </h2>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+
+  <div class="groups">
+  	<%= render 'groups/group_form' %>
+  </div>
+
 </div>
 
 <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>

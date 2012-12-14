@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	attr_accessible :firstName, :lastName, :email, :password, :password_confirmation
 	has_secure_password
 
+	#has_many :groups, through => :user_groups
 
 	before_save { |user| user.email = email.downcase }
 	before_save :create_remember_token
@@ -13,7 +14,15 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
     validates :password, length: { minimum: 6 }
     validates :password_confirmation, presence: true
-    
+
+    def add_to_group!(group)
+    	user_groups.create!(group_id: group.id)
+    end
+
+    def remove_from_group!(group)
+    	user_groups.find_by_group_id(group.id).destroy
+    end
+
     private
 
 	    def create_remember_token

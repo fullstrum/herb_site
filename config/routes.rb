@@ -1,6 +1,7 @@
 HerbSite::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+  resources :groups, only: [:create, :destroy]
 
   root to: 'static_pages#home'
 
@@ -9,7 +10,6 @@ HerbSite::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/contact', to: "static_pages#contact"
 
-  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
